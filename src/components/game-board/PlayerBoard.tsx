@@ -1,0 +1,39 @@
+import type { PlayerState } from '@/lib/types'
+
+interface Props {
+  player: PlayerState
+  isActive: boolean
+}
+
+export default function PlayerBoard({ player, isActive }: Props) {
+  return (
+    <div className="flex items-center gap-3 px-4 py-3">
+      {/* Vertical stats */}
+      <div className="w-28 shrink-0 flex flex-col gap-0.5">
+        <div className="flex items-center gap-1.5 mb-1">
+          <span
+            className="w-3 h-3 rounded-full shrink-0 border-2"
+            style={{
+              backgroundColor: isActive ? '#4ade80' : 'transparent',
+              borderColor: isActive ? '#4ade80' : '#6b7280',
+            }}
+          />
+          <span className="font-semibold text-sm text-white">{player.name}</span>
+        </div>
+        <span className="text-xs text-gray-400">Coins: {player.money}</span>
+        <span className="text-xs text-gray-400">Income: {player.income}</span>
+        <span className="text-xs text-gray-400">VP: {player.vp}</span>
+      </div>
+
+      {/* Sector slots */}
+      <div className="flex gap-1.5 flex-1 overflow-x-auto">
+        {Array.from({ length: 12 }, (_, i) => (
+          <div key={i + 1} className="flex flex-col items-center gap-0.5 shrink-0">
+            <div className="w-12 h-14 rounded-lg border border-gray-600 bg-gray-800" />
+            <span className="text-xs text-gray-500">{i + 1}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
