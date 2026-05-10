@@ -1,6 +1,6 @@
 import type { GameState } from '@/lib/types'
 import { COLONY_CARDS } from '@/lib/cards'
-import VictoryCard from './VictoryCard'
+import VictoryCard from '@/components/cards/VictoryCard'
 
 interface Props {
   gameState: GameState
