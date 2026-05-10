@@ -1,2 +1,0 @@
-# PlayerBoard Component
-

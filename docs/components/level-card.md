@@ -1,2 +1,0 @@
-# Level Card Component
-
