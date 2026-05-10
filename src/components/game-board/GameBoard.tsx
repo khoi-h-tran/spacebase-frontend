@@ -1,10 +1,10 @@
 'use client'
 
 import type { GameState } from '@/lib/types'
-import DiceArea from './DiceArea'
-import VictoryCards from './VictoryCards'
-import Shipyard from './Shipyard'
-import PlayerBoard from './PlayerBoard'
+import DiceArea from './board-features/DiceArea'
+import VictoryCards from './board-features/VictoryCards'
+import Shipyard from './board-features/Shipyard'
+import PlayerBoard from './board-features/PlayerBoard'
 
 interface Props {
   gameState: GameState
