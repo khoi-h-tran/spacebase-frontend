@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import type { GameState, RosterPlayer } from '@/lib/types'
 import { DEFAULT_GAME_STATE } from '@/lib/constants'
+import Starfield from './Starfield'
 
 interface Props {
   initialState: GameState
@@ -73,9 +74,10 @@ export default function LobbyClient({ initialState, roster }: Props) {
   const canLaunch = checkedIn.size >= 2 && !launching
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center gap-10 p-8">
+    <div className="min-h-screen text-white flex flex-col items-center justify-center gap-10 p-8">
+      <Starfield />
       <h1 className="text-5xl font-bold tracking-widest uppercase">
-        🚀 Spacebase 🚀
+        Spacebase
 </h1>
 
       <div className="w-80 bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden">
