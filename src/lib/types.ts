@@ -63,3 +63,10 @@ export interface RosterPlayer {
   name: string
   color: string
 }
+
+export interface Colony {
+  id: string
+  sector: number
+  cost: number
+  vp: number
+}

@@ -27,7 +27,7 @@ export default function GameBoard({ gameState }: Props) {
         {/* Top section: cards left, dice right */}
         <div className="flex gap-4 items-end">
           <div className="flex flex-col gap-2 flex-1 min-w-0">
-            <VictoryCards />
+            <VictoryCards gameState={gameState} />
             <Shipyard />
           </div>
           <DiceArea />
