@@ -5,5 +5,5 @@ export const ROSTER: RosterPlayer[] = [
   { id: 'jay',             name: 'Jay',             color: '#ef4444' },
   { id: 'peter',           name: 'Peter',           color: '#22c55e' },
   { id: 'diego',           name: 'Diego',           color: '#a855f7' },
-  { id: 'white-privilege', name: 'White Privilege', color: '#f97316' },
+  { id: 'josh',            name: 'Josh',            color: '#f97316' },
 ]

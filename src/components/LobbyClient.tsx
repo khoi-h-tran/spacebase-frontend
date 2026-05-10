@@ -10,6 +10,7 @@ interface Props {
   roster: RosterPlayer[]
 }
 
+
 export default function LobbyClient({ initialState, roster }: Props) {
   const router = useRouter()
   const [checkedIn, setCheckedIn] = useState<Set<string>>(() => {
@@ -20,7 +21,12 @@ export default function LobbyClient({ initialState, roster }: Props) {
   function toggle(id: string) {
     setCheckedIn(prev => {
       const next = new Set(prev)
-      next.has(id) ? next.delete(id) : next.add(id)
+      if (next.has(id)) {
+        next.delete(id)
+      } else {
+        next.add(id)
+
+      }
       return next
     })
   }
@@ -69,12 +75,12 @@ export default function LobbyClient({ initialState, roster }: Props) {
   return (
     <div className="min-h-screen bg-gray-950 text-white flex flex-col items-center justify-center gap-10 p-8">
       <h1 className="text-5xl font-bold tracking-widest uppercase">
-        🚀 Spacebase
-      </h1>
+        🚀 Spacebase 🚀
+</h1>
 
       <div className="w-80 bg-gray-900 rounded-2xl border border-gray-700 overflow-hidden">
         <div className="px-5 py-3 border-b border-gray-700 text-sm font-semibold text-gray-400 uppercase tracking-wider">
-          Space Commanders
+          Space Cowboys
         </div>
         <ul>
           {roster.map(player => {
@@ -88,14 +94,8 @@ export default function LobbyClient({ initialState, roster }: Props) {
                     onChange={() => toggle(player.id)}
                     className="w-4 h-4 accent-white rounded"
                   />
-                  <span
-                    className="w-2.5 h-2.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: player.color }}
-                  />
                   <span className="flex-1">{player.name}</span>
-                  <span className="text-xs text-gray-500">
-                    {checked ? 'checked in' : 'not present'}
-                  </span>
+                  <span className={`w-3 h-3 rounded-full flex-shrink-0 transition-colors ${checked ? 'bg-green-400' : 'bg-gray-700'}`} />
                 </label>
               </li>
             )
@@ -103,19 +103,20 @@ export default function LobbyClient({ initialState, roster }: Props) {
         </ul>
       </div>
 
-      <button
-        onClick={launch}
-        disabled={!canLaunch}
-        className="px-8 py-3 rounded-xl font-semibold text-lg tracking-wide transition-all
-          disabled:opacity-30 disabled:cursor-not-allowed
-          bg-indigo-600 hover:bg-indigo-500 active:scale-95"
-      >
-        {launching ? 'Launching…' : 'Launch Mission'}
-      </button>
-
-      {checkedIn.size < 2 && (
-        <p className="text-sm text-gray-500">At least 2 commanders required</p>
-      )}
+      <div className="flex flex-col items-center gap-2">
+        <button
+          onClick={launch}
+          disabled={!canLaunch}
+          className="px-8 py-3 rounded-xl font-semibold text-lg tracking-wide transition-all
+            disabled:opacity-30 disabled:cursor-not-allowed
+            bg-indigo-600 hover:bg-indigo-500 active:scale-95"
+        >
+          {launching ? 'Launching…' : 'Launch Mission'}
+        </button>
+        <p className={`text-sm text-gray-500 transition-opacity ${checkedIn.size < 2 ? 'opacity-100' : 'opacity-0'}`}>
+          At least 2 space cowboys required
+        </p>
+      </div>
     </div>
   )
 }
