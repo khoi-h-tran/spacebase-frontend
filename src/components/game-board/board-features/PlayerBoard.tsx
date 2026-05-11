@@ -1,4 +1,6 @@
 import type { PlayerState } from '@/lib/types'
+import { SHIP_CARDS_BY_ID } from '@/lib/cards'
+import LevelCard from '@/components/cards/LevelCard'
 
 interface Props {
   player: PlayerState
@@ -33,9 +35,22 @@ export default function PlayerBoard({ player, isActive, highlightedSectors, targ
           const sector = i + 1
           const highlighted = highlightedSectors.includes(sector)
           const isTarget = targetSector === sector
+          const sectorState = player.sectors[sector]
+          const stationedCard = sectorState ? SHIP_CARDS_BY_ID[sectorState.stationCard] : undefined
+
           return (
             <div key={sector} className="flex flex-col items-center gap-0.5 shrink-0">
-              <div className={`w-12 h-14 rounded-lg border transition-colors ${isTarget ? 'border-green-400 bg-green-900/40' : highlighted ? 'border-yellow-400 bg-yellow-900/40' : 'border-gray-600 bg-gray-800'}`} />
+              <div className={`w-16 h-20 rounded-lg border transition-colors overflow-hidden ${isTarget ? 'border-green-400' : highlighted ? 'border-yellow-400' : 'border-gray-600'}`}>
+                {stationedCard ? (
+                  <LevelCard
+                    card={stationedCard}
+                    mode="stationed"
+                    isHighlighted={highlighted}
+                  />
+                ) : (
+                  <div className={`w-full h-full ${isTarget ? 'bg-green-900/40' : highlighted ? 'bg-yellow-900/40' : 'bg-gray-800'}`} />
+                )}
+              </div>
               <span className={`text-xs transition-colors ${isTarget ? 'text-green-400 font-semibold' : highlighted ? 'text-yellow-400 font-semibold' : 'text-gray-500'}`}>{sector}</span>
             </div>
           )

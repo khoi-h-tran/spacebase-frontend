@@ -30,7 +30,7 @@ export default function LevelCard({ card, mode, isHighlighted, isSelected, isAff
     <div
       onClick={dimmed ? undefined : onSelect}
       className={`
-        flex flex-col w-full rounded-lg border-2 overflow-hidden transition-all relative
+        flex flex-col w-full h-full rounded-lg border-2 overflow-hidden transition-all relative
         ${border}
         ${isSelected ? 'ring-2 ring-white ring-offset-1 ring-offset-gray-900' : ''}
         ${isHighlighted ? 'ring-2 ring-yellow-400 ring-offset-1 ring-offset-gray-900' : ''}
@@ -57,11 +57,11 @@ export default function LevelCard({ card, mode, isHighlighted, isSelected, isAff
       )}
 
       {/* Divider */}
-      {mode === 'market' && <div className="h-px bg-gray-700" />}
+      {(mode === 'market' || mode === 'stationed') && <div className="h-px bg-gray-700" />}
 
       {/* Deployed reward (red) + buy button */}
-      {(mode === 'market' || mode === 'deployed') && (
-        <div className="flex items-center justify-between bg-red-950/60 px-1.5 py-1.5">
+      {(mode === 'market' || mode === 'stationed' || mode === 'deployed') && (
+        <div className={`flex items-center bg-red-950/60 px-1.5 py-1.5 ${isSelected && onBuy ? 'justify-between' : 'justify-center'}`}>
           <span className="text-xs text-red-300 font-semibold">{rewardLabel(card.deployed)}</span>
           {isSelected && onBuy && (
             <button

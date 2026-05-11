@@ -47,7 +47,7 @@ export default function LobbyClient({ initialState, roster }: Props) {
             id: p.id,
             name: p.name,
             color: p.color,
-            money: 15, // TODO: reset to 5
+            money: 6, // TODO: reset to 5
             income: 0,
             vp: 0,
             hasStartCard: false,

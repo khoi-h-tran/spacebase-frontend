@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { GameState, DiceState } from '@/lib/types'
-import { SHIP_CARDS_BY_ID } from '@/lib/cards'
+import { SHIP_CARDS, SHIP_CARDS_BY_ID } from '@/lib/cards'
 import DiceArea from './board-features/DiceArea'
 import VictoryCards from './board-features/VictoryCards'
 import Shipyard from './board-features/Shipyard'
@@ -66,7 +66,10 @@ export default function GameBoard({ gameState: initialState }: Props) {
 
     // Remove card from shipyard, draw replacement from deck
     const levelKey = `level${card.level}` as 'level1' | 'level2' | 'level3'
-    const shipyardRow = gameState.shipyard[levelKey].filter(id => id !== cardId)
+    const currentShipyard = gameState.shipyard[levelKey].length > 0
+      ? gameState.shipyard[levelKey]
+      : SHIP_CARDS.filter(c => c.level === card.level).slice(0, 6).map(c => c.id)
+    const shipyardRow = currentShipyard.filter(id => id !== cardId)
     const [drawn, ...remainingDeck] = gameState.decks[levelKey]
     const newShipyardRow = drawn ? [...shipyardRow, drawn] : shipyardRow
 

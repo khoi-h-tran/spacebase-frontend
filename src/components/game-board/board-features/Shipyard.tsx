@@ -43,18 +43,25 @@ export default function Shipyard({ gameState, selectedCardId, onSelectCard, onBu
               <span className="text-sm font-bold leading-none">{remaining}/{total}</span>
             </div>
             <div className="flex gap-1.5 flex-1">
-              {cards.map(card => (
-                <div key={card.id} className="flex-1">
-                  <LevelCard
-                    card={card}
-                    mode="market"
-                    isAffordable={money >= card.cost}
-                    isSelected={selectedCardId === card.id}
-                    onSelect={() => onSelectCard(card.id)}
-                    onBuy={() => onBuyCard(card.id)}
-                  />
-                </div>
-              ))}
+              {Array.from({ length: 6 }, (_, i) => {
+                const card = cards[i]
+                return (
+                  <div key={i} className="flex-1">
+                    {card ? (
+                      <LevelCard
+                        card={card}
+                        mode="market"
+                        isAffordable={money >= card.cost}
+                        isSelected={selectedCardId === card.id}
+                        onSelect={() => onSelectCard(card.id)}
+                        onBuy={() => onBuyCard(card.id)}
+                      />
+                    ) : (
+                      <div className={`w-full h-full min-h-[80px] rounded-lg border-2 border-dashed opacity-30 ${LEVEL_BORDER[level]}`} />
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
         )
