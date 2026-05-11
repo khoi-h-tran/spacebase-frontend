@@ -64,6 +64,23 @@ export interface RosterPlayer {
   color: string
 }
 
+export type RewardType = 'money' | 'income' | 'vp'
+
+export interface Reward {
+  type: RewardType
+  amount: number
+}
+
+export interface Ship {
+  id: string
+  name: string
+  sector: number
+  level: 1 | 2 | 3
+  cost: number
+  station: Reward
+  deployed: Reward
+}
+
 export interface Colony {
   id: string
   sector: number

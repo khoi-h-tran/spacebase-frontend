@@ -48,7 +48,7 @@ export default function GameBoard({ gameState: initialState }: Props) {
         <div className="flex gap-4 items-end">
           <div className="flex flex-col gap-2 flex-1 min-w-0">
             <VictoryCards gameState={gameState} />
-            <Shipyard />
+            <Shipyard gameState={gameState} />
           </div>
           <DiceArea dice={gameState.dice} onRoll={handleRoll} allocation={allocation} onAllocationChange={setAllocation} />
         </div>
