@@ -26,6 +26,7 @@ export default function GameBoard({ gameState: initialState }: Props) {
     .filter(Boolean)
 
   async function handleRoll(dice: DiceState) {
+    setAllocation(null)
     const next = { ...gameState, dice }
     await fetch('/api/game', {
       method: 'POST',
