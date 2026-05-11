@@ -1,22 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+
 import type { DiceState } from '@/lib/types'
 
 interface Props {
   dice: DiceState | null
   onRoll: (dice: DiceState) => void
+  allocation: 'split' | 'combine' | null
+  onAllocationChange: (a: 'split' | 'combine') => void
 }
 
-export default function DiceArea({ dice, onRoll }: Props) {
-  const [allocation, setAllocation] = useState<'split' | 'combine' | null>(null)
-
+export default function DiceArea({ dice, onRoll, allocation, onAllocationChange }: Props) {
   function roll() {
     const values: [number, number] = [
       Math.ceil(Math.random() * 6),
       Math.ceil(Math.random() * 6),
     ]
-    setAllocation(null)
     onRoll({ values, allocation: null })
   }
 
@@ -48,7 +47,7 @@ export default function DiceArea({ dice, onRoll }: Props) {
               name="allocation"
               disabled={!hasRolled}
               checked={allocation === 'combine'}
-              onChange={() => setAllocation('combine')}
+              onChange={() => onAllocationChange('combine')}
               className="hidden"
             />
             <span className={`w-3.5 h-3.5 rounded-full border-2 inline-block transition-colors ${allocation === 'combine' ? 'border-blue-400 bg-blue-400' : 'border-gray-400'}`} />
@@ -63,7 +62,7 @@ export default function DiceArea({ dice, onRoll }: Props) {
               name="allocation"
               disabled={!hasRolled}
               checked={allocation === 'split'}
-              onChange={() => setAllocation('split')}
+              onChange={() => onAllocationChange('split')}
               className="hidden"
             />
             <span className={`w-3.5 h-3.5 rounded-full border-2 inline-block transition-colors ${allocation === 'split' ? 'border-blue-400 bg-blue-400' : 'border-gray-400'}`} />

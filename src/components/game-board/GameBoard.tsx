@@ -13,6 +13,13 @@ interface Props {
 
 export default function GameBoard({ gameState: initialState }: Props) {
   const [gameState, setGameState] = useState(initialState)
+  const [allocation, setAllocation] = useState<'split' | 'combine' | null>(null)
+
+  const highlightedSectors = (() => {
+    if (!gameState.dice || !allocation) return []
+    const [d1, d2] = gameState.dice.values
+    return allocation === 'combine' ? [d1 + d2] : [d1, d2]
+  })()
 
   const players = gameState.turnOrder
     .map(id => gameState.players[id])
@@ -43,7 +50,7 @@ export default function GameBoard({ gameState: initialState }: Props) {
             <VictoryCards gameState={gameState} />
             <Shipyard />
           </div>
-          <DiceArea dice={gameState.dice} onRoll={handleRoll} />
+          <DiceArea dice={gameState.dice} onRoll={handleRoll} allocation={allocation} onAllocationChange={setAllocation} />
         </div>
 
         {/* Player boards scrollable container */}
@@ -57,6 +64,7 @@ export default function GameBoard({ gameState: initialState }: Props) {
                 key={player.id}
                 player={player}
                 isActive={i === gameState.activePlayerIndex}
+                highlightedSectors={highlightedSectors}
               />
             ))
           )}
