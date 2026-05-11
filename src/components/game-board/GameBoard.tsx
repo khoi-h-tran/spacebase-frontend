@@ -45,31 +45,31 @@ export default function GameBoard({ gameState: initialState }: Props) {
           ⚙
         </button>
 
-        {/* Top section: cards left, dice right */}
-        <div className="flex gap-4 items-end">
-          <div className="flex flex-col gap-2 flex-1 min-w-0">
-            <VictoryCards gameState={gameState} />
-            <Shipyard gameState={gameState} />
-          </div>
-          <DiceArea dice={gameState.dice} onRoll={handleRoll} allocation={allocation} onAllocationChange={setAllocation} />
+        {/* Top section: victory cards + shipyard */}
+        <div className="flex flex-col gap-2">
+          <VictoryCards gameState={gameState} />
+          <Shipyard gameState={gameState} />
         </div>
 
-        {/* Player boards scrollable container */}
-        <div className="overflow-x-auto">
-        <div className="border-2 border-gray-600 rounded-2xl overflow-y-auto max-h-[50vh] divide-y divide-gray-700 w-fit">
-          {players.length === 0 ? (
-            <div className="p-6 text-center text-gray-500 text-sm">No players — launch a game from the lobby first.</div>
-          ) : (
-            players.map((player, i) => (
-              <PlayerBoard
-                key={player.id}
-                player={player}
-                isActive={i === gameState.activePlayerIndex}
-                highlightedSectors={highlightedSectors}
-              />
-            ))
-          )}
-        </div>
+        {/* Bottom section: player boards + dice side by side */}
+        <div className="flex gap-4 items-center flex-1 min-h-0">
+          <div className="overflow-x-auto flex-1 self-stretch">
+            <div className="border-2 border-gray-600 rounded-2xl overflow-y-auto h-full divide-y divide-gray-700 w-full">
+              {players.length === 0 ? (
+                <div className="p-6 text-center text-gray-500 text-sm">No players — launch a game from the lobby first.</div>
+              ) : (
+                players.map((player, i) => (
+                  <PlayerBoard
+                    key={player.id}
+                    player={player}
+                    isActive={i === gameState.activePlayerIndex}
+                    highlightedSectors={highlightedSectors}
+                  />
+                ))
+              )}
+            </div>
+          </div>
+          <DiceArea dice={gameState.dice} onRoll={handleRoll} allocation={allocation} onAllocationChange={setAllocation} />
         </div>
 
       </div>
