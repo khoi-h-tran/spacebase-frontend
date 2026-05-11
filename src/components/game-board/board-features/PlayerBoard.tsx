@@ -4,9 +4,10 @@ interface Props {
   player: PlayerState
   isActive: boolean
   highlightedSectors: number[]
+  targetSector: number | null
 }
 
-export default function PlayerBoard({ player, isActive, highlightedSectors }: Props) {
+export default function PlayerBoard({ player, isActive, highlightedSectors, targetSector }: Props) {
   return (
     <div className="flex items-center gap-3 px-4 py-3">
       {/* Vertical stats */}
@@ -31,10 +32,11 @@ export default function PlayerBoard({ player, isActive, highlightedSectors }: Pr
         {Array.from({ length: 12 }, (_, i) => {
           const sector = i + 1
           const highlighted = highlightedSectors.includes(sector)
+          const isTarget = targetSector === sector
           return (
             <div key={sector} className="flex flex-col items-center gap-0.5 shrink-0">
-              <div className={`w-12 h-14 rounded-lg border transition-colors ${highlighted ? 'border-yellow-400 bg-yellow-900/40' : 'border-gray-600 bg-gray-800'}`} />
-              <span className={`text-xs transition-colors ${highlighted ? 'text-yellow-400 font-semibold' : 'text-gray-500'}`}>{sector}</span>
+              <div className={`w-12 h-14 rounded-lg border transition-colors ${isTarget ? 'border-green-400 bg-green-900/40' : highlighted ? 'border-yellow-400 bg-yellow-900/40' : 'border-gray-600 bg-gray-800'}`} />
+              <span className={`text-xs transition-colors ${isTarget ? 'text-green-400 font-semibold' : highlighted ? 'text-yellow-400 font-semibold' : 'text-gray-500'}`}>{sector}</span>
             </div>
           )
         })}

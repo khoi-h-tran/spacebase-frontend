@@ -4,6 +4,9 @@ import LevelCard from '@/components/cards/LevelCard'
 
 interface Props {
   gameState: GameState
+  selectedCardId: string | null
+  onSelectCard: (id: string) => void
+  onBuyCard: (id: string) => void
 }
 
 const LEVEL_LABELS: { level: 1 | 2 | 3; key: 'level1' | 'level2' | 'level3' }[] = [
@@ -18,7 +21,7 @@ const LEVEL_BG     = { 1: 'bg-gray-800',      2: 'bg-yellow-950',     3: 'bg-pur
 const LEVEL_TOTAL  = { 1: 0, 2: 0, 3: 0 } as Record<1 | 2 | 3, number>
 for (const card of SHIP_CARDS) LEVEL_TOTAL[card.level]++
 
-export default function Shipyard({ gameState }: Props) {
+export default function Shipyard({ gameState, selectedCardId, onSelectCard, onBuyCard }: Props) {
   const activePlayer = gameState.players[gameState.turnOrder[gameState.activePlayerIndex]]
   const money = activePlayer?.money ?? 0
 
@@ -46,7 +49,9 @@ export default function Shipyard({ gameState }: Props) {
                     card={card}
                     mode="market"
                     isAffordable={money >= card.cost}
-                    onClick={() => {}}
+                    isSelected={selectedCardId === card.id}
+                    onSelect={() => onSelectCard(card.id)}
+                    onBuy={() => onBuyCard(card.id)}
                   />
                 </div>
               ))}

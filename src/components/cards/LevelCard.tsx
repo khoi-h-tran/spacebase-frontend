@@ -4,8 +4,10 @@ interface Props {
   card: Ship
   mode: 'market' | 'stationed' | 'deployed'
   isHighlighted?: boolean
+  isSelected?: boolean
   isAffordable?: boolean
-  onClick?: () => void
+  onSelect?: () => void
+  onBuy?: () => void
 }
 
 const LEVEL_STYLES = {
@@ -20,19 +22,19 @@ function rewardLabel(r: Reward) {
   if (r.type === 'vp')     return `+${r.amount} 🚀`
 }
 
-export default function LevelCard({ card, mode, isHighlighted, isAffordable, onClick }: Props) {
+export default function LevelCard({ card, mode, isHighlighted, isSelected, isAffordable, onSelect, onBuy }: Props) {
   const { border } = LEVEL_STYLES[card.level]
   const dimmed = mode === 'market' && isAffordable === false
 
   return (
-    <button
-      onClick={onClick}
-      disabled={!onClick || dimmed}
+    <div
+      onClick={dimmed ? undefined : onSelect}
       className={`
-        flex flex-col w-full rounded-lg border-2 overflow-hidden text-left transition-all
+        flex flex-col w-full rounded-lg border-2 overflow-hidden transition-all relative
         ${border}
+        ${isSelected ? 'ring-2 ring-white ring-offset-1 ring-offset-gray-900' : ''}
         ${isHighlighted ? 'ring-2 ring-yellow-400 ring-offset-1 ring-offset-gray-900' : ''}
-        ${dimmed ? 'opacity-40 cursor-not-allowed' : onClick ? 'cursor-pointer hover:brightness-110' : 'cursor-default'}
+        ${dimmed ? 'opacity-40 cursor-not-allowed' : onSelect ? 'cursor-pointer hover:brightness-110' : 'cursor-default'}
       `}
     >
       {/* Header: cost + sector (market only) */}
@@ -57,12 +59,20 @@ export default function LevelCard({ card, mode, isHighlighted, isAffordable, onC
       {/* Divider */}
       {mode === 'market' && <div className="h-px bg-gray-700" />}
 
-      {/* Deployed reward (red) */}
+      {/* Deployed reward (red) + buy button */}
       {(mode === 'market' || mode === 'deployed') && (
-        <div className="flex items-center justify-center bg-red-950/60 px-1.5 py-1.5 text-xs text-red-300 font-semibold">
-          {rewardLabel(card.deployed)}
+        <div className="flex items-center justify-between bg-red-950/60 px-1.5 py-1.5">
+          <span className="text-xs text-red-300 font-semibold">{rewardLabel(card.deployed)}</span>
+          {isSelected && onBuy && (
+            <button
+              onClick={e => { e.stopPropagation(); onBuy() }}
+              className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-green-600 hover:bg-green-500 text-white leading-none"
+            >
+              Buy
+            </button>
+          )}
         </div>
       )}
-    </button>
+    </div>
   )
 }

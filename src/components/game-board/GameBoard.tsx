@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import type { GameState, DiceState } from '@/lib/types'
+import { SHIP_CARDS_BY_ID } from '@/lib/cards'
 import DiceArea from './board-features/DiceArea'
 import VictoryCards from './board-features/VictoryCards'
 import Shipyard from './board-features/Shipyard'
@@ -14,6 +15,10 @@ interface Props {
 export default function GameBoard({ gameState: initialState }: Props) {
   const [gameState, setGameState] = useState(initialState)
   const [allocation, setAllocation] = useState<'split' | 'combine' | null>(null)
+  const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
+
+  const selectedCard = selectedCardId ? SHIP_CARDS_BY_ID[selectedCardId] : null
+  const targetSector = selectedCard?.sector ?? null
 
   const highlightedSectors = (() => {
     if (!gameState.dice || !allocation) return []
@@ -25,15 +30,62 @@ export default function GameBoard({ gameState: initialState }: Props) {
     .map(id => gameState.players[id])
     .filter(Boolean)
 
-  async function handleRoll(dice: DiceState) {
-    setAllocation(null)
-    const next = { ...gameState, dice }
+  async function persist(next: GameState) {
     await fetch('/api/game', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(next),
     })
     setGameState(next)
+  }
+
+  async function handleRoll(dice: DiceState) {
+    setAllocation(null)
+    setSelectedCardId(null)
+    await persist({ ...gameState, dice })
+  }
+
+  function handleSelectCard(id: string) {
+    setSelectedCardId(prev => prev === id ? null : id)
+  }
+
+  async function handleBuyCard(cardId: string) {
+    const card = SHIP_CARDS_BY_ID[cardId]
+    if (!card) return
+
+    const activePlayerId = gameState.turnOrder[gameState.activePlayerIndex]
+    const player = gameState.players[activePlayerId]
+    if (!player || player.money < card.cost) return
+
+    const sector = player.sectors[card.sector]
+    const updatedSector = {
+      ...sector,
+      stationCard: card.id,
+      deployedCards: [sector.stationCard, ...sector.deployedCards],
+    }
+
+    // Remove card from shipyard, draw replacement from deck
+    const levelKey = `level${card.level}` as 'level1' | 'level2' | 'level3'
+    const shipyardRow = gameState.shipyard[levelKey].filter(id => id !== cardId)
+    const [drawn, ...remainingDeck] = gameState.decks[levelKey]
+    const newShipyardRow = drawn ? [...shipyardRow, drawn] : shipyardRow
+
+    const next: GameState = {
+      ...gameState,
+      players: {
+        ...gameState.players,
+        [activePlayerId]: {
+          ...player,
+          money: player.money - card.cost,
+          sectors: { ...player.sectors, [card.sector]: updatedSector },
+        },
+      },
+      shipyard: { ...gameState.shipyard, [levelKey]: newShipyardRow },
+      decks: { ...gameState.decks, [levelKey]: remainingDeck ?? [] },
+    }
+
+    setSelectedCardId(null)
+    await persist(next)
   }
 
   return (
@@ -48,7 +100,12 @@ export default function GameBoard({ gameState: initialState }: Props) {
         {/* Top section: victory cards + shipyard */}
         <div className="flex flex-col gap-2">
           <VictoryCards gameState={gameState} />
-          <Shipyard gameState={gameState} />
+          <Shipyard
+            gameState={gameState}
+            selectedCardId={selectedCardId}
+            onSelectCard={handleSelectCard}
+            onBuyCard={handleBuyCard}
+          />
         </div>
 
         {/* Bottom section: player boards + dice side by side */}
@@ -64,6 +121,7 @@ export default function GameBoard({ gameState: initialState }: Props) {
                     player={player}
                     isActive={i === gameState.activePlayerIndex}
                     highlightedSectors={highlightedSectors}
+                    targetSector={targetSector}
                   />
                 ))
               )}
