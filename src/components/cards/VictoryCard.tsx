@@ -23,8 +23,8 @@ export default function VictoryCard({ card, isAffordable, isPurchased, onClick }
       className={`
         flex-1 min-w-[80px] h-20 rounded-lg border-2 flex flex-col overflow-hidden text-left transition-colors
         ${isAffordable
-          ? 'border-amber-400 bg-amber-950 hover:bg-amber-900 cursor-pointer'
-          : 'border-amber-800 bg-amber-950/40 cursor-not-allowed opacity-60'
+          ? 'border-amber-700 bg-amber-950/60 hover:bg-amber-950 cursor-pointer'
+          : 'border-gray-700 bg-gray-900 cursor-not-allowed opacity-50'
         }
       `}
     >
@@ -36,7 +36,7 @@ export default function VictoryCard({ card, isAffordable, isPurchased, onClick }
 
       {/* VP */}
       <div className="flex-1 flex items-center justify-center">
-        <span className="text-amber-400 font-bold text-sm">{card.vp} VP</span>
+        <span className="text-amber-500/80 font-bold text-sm">{card.vp} VP</span>
       </div>
     </button>
   )
