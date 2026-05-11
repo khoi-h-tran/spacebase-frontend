@@ -22,7 +22,7 @@ export default function PlayerBoard({ player, isActive, highlightedSectors }: Pr
           <span className="font-semibold text-sm text-white">{player.name}</span>
         </div>
         <span className="text-xs text-gray-400 pl-4">🪙 {player.money}</span>
-        <span className="text-xs text-gray-400 pl-4">💎 {player.income}</span>
+        <span className="text-xs text-gray-400 pl-4">🌍 {player.income}</span>
         <span className="text-xs text-gray-400 pl-4">🚀 {player.vp}</span>
       </div>
 

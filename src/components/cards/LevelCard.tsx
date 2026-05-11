@@ -16,7 +16,7 @@ const LEVEL_STYLES = {
 
 function rewardLabel(r: Reward) {
   if (r.type === 'money')  return `+${r.amount} 🪙`
-  if (r.type === 'income') return `+${r.amount} 💎`
+  if (r.type === 'income') return `+${r.amount} 🌍`
   if (r.type === 'vp')     return `+${r.amount} 🚀`
 }
 

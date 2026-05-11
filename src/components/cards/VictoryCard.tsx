@@ -36,7 +36,7 @@ export default function VictoryCard({ card, isAffordable, isPurchased, onClick }
 
       {/* VP */}
       <div className="flex-1 flex items-center justify-center">
-        <span className="text-amber-500/80 font-bold text-sm">{card.vp} VP</span>
+        <span className="text-amber-500/80 font-bold text-sm">{card.vp} 🚀</span>
       </div>
     </button>
   )
