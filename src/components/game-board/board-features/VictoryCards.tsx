@@ -19,7 +19,7 @@ export default function VictoryCards({ gameState }: Props) {
   )
 
   return (
-    <div className="flex gap-1.5">
+    <div className="flex gap-1.5 pr-10">
       {COLONY_CARDS.map(card => (
         <VictoryCard
           key={card.id}
