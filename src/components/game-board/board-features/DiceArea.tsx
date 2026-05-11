@@ -54,7 +54,7 @@ export default function DiceArea({ dice, onRoll }: Props) {
             <span className={`w-3.5 h-3.5 rounded-full border-2 inline-block transition-colors ${allocation === 'combine' ? 'border-blue-400 bg-blue-400' : 'border-gray-400'}`} />
             <span>Combine</span>
             <span className="w-8 h-7 rounded border border-gray-500 bg-gray-800 flex items-center justify-center text-white font-bold">
-              {allocation === 'combine' && combined !== null ? combined : '—'}
+              {combined !== null ? combined : '—'}
             </span>
           </label>
           <label className={`flex items-center gap-2 ${hasRolled ? 'cursor-pointer' : 'cursor-not-allowed opacity-50'}`}>
@@ -69,10 +69,10 @@ export default function DiceArea({ dice, onRoll }: Props) {
             <span className={`w-3.5 h-3.5 rounded-full border-2 inline-block transition-colors ${allocation === 'split' ? 'border-blue-400 bg-blue-400' : 'border-gray-400'}`} />
             <span>Split</span>
             <span className="w-8 h-7 rounded border border-gray-500 bg-gray-800 flex items-center justify-center text-white font-bold">
-              {allocation === 'split' && dice ? dice.values[0] : '—'}
+              {dice ? dice.values[0] : '—'}
             </span>
             <span className="w-8 h-7 rounded border border-gray-500 bg-gray-800 flex items-center justify-center text-white font-bold">
-              {allocation === 'split' && dice ? dice.values[1] : '—'}
+              {dice ? dice.values[1] : '—'}
             </span>
           </label>
         </div>
