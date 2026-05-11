@@ -1,6 +1,7 @@
 'use client'
 
-import type { GameState } from '@/lib/types'
+import { useState } from 'react'
+import type { GameState, DiceState } from '@/lib/types'
 import DiceArea from './board-features/DiceArea'
 import VictoryCards from './board-features/VictoryCards'
 import Shipyard from './board-features/Shipyard'
@@ -10,10 +11,22 @@ interface Props {
   gameState: GameState
 }
 
-export default function GameBoard({ gameState }: Props) {
+export default function GameBoard({ gameState: initialState }: Props) {
+  const [gameState, setGameState] = useState(initialState)
+
   const players = gameState.turnOrder
     .map(id => gameState.players[id])
     .filter(Boolean)
+
+  async function handleRoll(dice: DiceState) {
+    const next = { ...gameState, dice }
+    await fetch('/api/game', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(next),
+    })
+    setGameState(next)
+  }
 
   return (
     <div className="h-screen bg-gray-950 flex items-center justify-center p-3">
@@ -30,7 +43,7 @@ export default function GameBoard({ gameState }: Props) {
             <VictoryCards gameState={gameState} />
             <Shipyard />
           </div>
-          <DiceArea />
+          <DiceArea dice={gameState.dice} onRoll={handleRoll} />
         </div>
 
         {/* Player boards scrollable container */}
