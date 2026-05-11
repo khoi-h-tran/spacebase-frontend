@@ -30,7 +30,7 @@ export default function PlayerBoard({ player, isActive, highlightedSectors, targ
       </div>
 
       {/* Sector slots */}
-      <div className="flex gap-1.5 flex-1 overflow-x-auto">
+      <div className="flex gap-1.5 flex-1 overflow-x-auto items-stretch">
         {Array.from({ length: 12 }, (_, i) => {
           const sector = i + 1
           const highlighted = highlightedSectors.includes(sector)
@@ -38,8 +38,22 @@ export default function PlayerBoard({ player, isActive, highlightedSectors, targ
           const sectorState = player.sectors[sector]
           const stationedCard = sectorState ? SHIP_CARDS_BY_ID[sectorState.stationCard] : undefined
 
+          const deployedCards = sectorState
+            ? sectorState.deployedCards.map(id => SHIP_CARDS_BY_ID[id]).filter(Boolean)
+            : []
+
           return (
-            <div key={sector} className="flex flex-col items-center gap-0.5 shrink-0">
+            <div key={sector} className="flex flex-col justify-end items-center gap-0.5 shrink-0">
+              {/* Deployed (flipped) cards — passive reward strips, oldest first */}
+              <div className="flex flex-col gap-0.5 w-16">
+                {[...deployedCards].reverse().map(dc => (
+                  <div key={dc.id} className="w-full h-7 rounded border overflow-hidden shrink-0">
+                    <LevelCard card={dc} mode="deployed" />
+                  </div>
+                ))}
+              </div>
+
+              {/* Active slot */}
               <div className={`w-16 h-20 rounded-lg border transition-colors overflow-hidden ${isTarget ? 'border-green-400' : highlighted ? 'border-yellow-400' : 'border-gray-600'}`}>
                 {stationedCard ? (
                   <LevelCard

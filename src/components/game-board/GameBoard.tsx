@@ -59,9 +59,12 @@ export default function GameBoard({ gameState: initialState }: Props) {
 
     const sector = player.sectors[card.sector]
     const updatedSector = {
-      ...sector,
       stationCard: card.id,
-      deployedCards: [sector.stationCard, ...sector.deployedCards],
+      deployedCards: sector?.stationCard
+        ? [sector.stationCard, ...(sector.deployedCards ?? [])]
+        : (sector?.deployedCards ?? []),
+      colonyCard: sector?.colonyCard ?? null,
+      chargeTokens: sector?.chargeTokens ?? 0,
     }
 
     // Remove card from shipyard, draw replacement from deck
@@ -118,15 +121,18 @@ export default function GameBoard({ gameState: initialState }: Props) {
               {players.length === 0 ? (
                 <div className="p-6 text-center text-gray-500 text-sm">No players — launch a game from the lobby first.</div>
               ) : (
-                players.map((player, i) => (
-                  <PlayerBoard
-                    key={player.id}
-                    player={player}
-                    isActive={i === gameState.activePlayerIndex}
-                    highlightedSectors={highlightedSectors}
-                    targetSector={targetSector}
-                  />
-                ))
+                players.map((player, i) => {
+                  const isActive = i === gameState.activePlayerIndex
+                  return (
+                    <PlayerBoard
+                      key={player.id}
+                      player={player}
+                      isActive={isActive}
+                      highlightedSectors={isActive ? highlightedSectors : []}
+                      targetSector={isActive ? targetSector : null}
+                    />
+                  )
+                })
               )}
             </div>
           </div>
