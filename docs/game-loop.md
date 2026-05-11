@@ -67,10 +67,12 @@ Order: Active player first, then Passive players in clockwise turn order.
 
 ## Game End Sequence
 
-1. A player hits **40 VP** at any point during their turn.
-2. Continue until the current round is complete (everyone has had the same number of turns).
-3. Count final VP totals.
-4. Highest VP wins. On a tie, play additional full rounds until the tie is broken.
+1. A player hits **40 VP** at any point during their turn — they are the **trigger player**.
+2. All players who come **after** the trigger player in the current rotation still take their turn.
+3. Players who already took their turn **before** the trigger player in the same rotation do **not** get another turn.
+   - Example: turn order P1 → P2 → P3 → P4 → P5. If P2 triggers, P3/P4/P5 still play; P1 does not.
+4. Count final VP totals after the last player in the rotation finishes.
+5. Highest VP wins. On a tie, play additional full rotations until the tie is broken.
 
 ---
 
@@ -99,8 +101,9 @@ refill
   → (shipyard refilled, income applied) → check_win
 
 check_win
-  → (no player at 40 VP) → roll  [next player]
-  → (a player at 40 VP AND round complete) → ended
+  → (no player at 40 VP AND no endgame triggered) → roll  [next player]
+  → (40 VP hit) → set endgame trigger, record trigger player index → roll  [next player]
+  → (endgame triggered AND next player index === trigger player index) → ended
 
 ended
   → display winner
