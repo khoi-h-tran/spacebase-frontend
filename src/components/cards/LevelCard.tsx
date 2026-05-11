@@ -11,9 +11,9 @@ interface Props {
 }
 
 const LEVEL_STYLES = {
-  1: { border: 'border-gray-400',   label: 'text-gray-300'   },
-  2: { border: 'border-yellow-500', label: 'text-yellow-400' },
-  3: { border: 'border-purple-500', label: 'text-purple-400' },
+  1: { border: 'border-gray-600', label: 'text-gray-300'   },
+  2: { border: 'border-gray-600', label: 'text-yellow-400' },
+  3: { border: 'border-gray-600', label: 'text-purple-400' },
 }
 
 function rewardLabel(r: Reward) {
