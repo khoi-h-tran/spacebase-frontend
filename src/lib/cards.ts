@@ -61,3 +61,4 @@ export const SHIP_CARDS: Ship[] = [
 ]
 
 export const SHIP_CARDS_BY_ID = Object.fromEntries(SHIP_CARDS.map(c => [c.id, c]))
+export const COLONY_CARDS_BY_ID = Object.fromEntries(COLONY_CARDS.map(c => [c.id, c]))

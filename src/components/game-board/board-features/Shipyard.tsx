@@ -24,6 +24,11 @@ for (const card of SHIP_CARDS) LEVEL_TOTAL[card.level]++
 export default function Shipyard({ gameState, selectedCardId, onSelectCard, onBuyCard }: Props) {
   const activePlayer = gameState.players[gameState.turnOrder[gameState.activePlayerIndex]]
   const money = activePlayer?.money ?? 0
+  const colonizedSectors = new Set(
+    Object.entries(activePlayer?.sectors ?? {})
+      .filter(([, s]) => s.colonyCard !== null)
+      .map(([sec]) => Number(sec))
+  )
 
   return (
     <div className="flex flex-col gap-1.5">
@@ -51,7 +56,7 @@ export default function Shipyard({ gameState, selectedCardId, onSelectCard, onBu
                       <LevelCard
                         card={card}
                         mode="market"
-                        isAffordable={money >= card.cost}
+                        isAffordable={money >= card.cost && !colonizedSectors.has(card.sector)}
                         isSelected={selectedCardId === card.id}
                         onSelect={() => onSelectCard(card.id)}
                         onBuy={() => onBuyCard(card.id)}

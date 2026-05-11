@@ -1,5 +1,5 @@
 import type { PlayerState } from '@/lib/types'
-import { SHIP_CARDS_BY_ID } from '@/lib/cards'
+import { SHIP_CARDS_BY_ID, COLONY_CARDS_BY_ID } from '@/lib/cards'
 import LevelCard from '@/components/cards/LevelCard'
 
 interface Props {
@@ -36,7 +36,8 @@ export default function PlayerBoard({ player, isActive, highlightedSectors, targ
           const highlighted = highlightedSectors.includes(sector)
           const isTarget = targetSector === sector
           const sectorState = player.sectors[sector]
-          const stationedCard = sectorState ? SHIP_CARDS_BY_ID[sectorState.stationCard] : undefined
+          const colony = sectorState?.colonyCard ? COLONY_CARDS_BY_ID[sectorState.colonyCard] : undefined
+          const stationedCard = !colony && sectorState ? SHIP_CARDS_BY_ID[sectorState.stationCard] : undefined
 
           const deployedCards = sectorState
             ? sectorState.deployedCards.map(id => SHIP_CARDS_BY_ID[id]).filter(Boolean)
@@ -54,13 +55,14 @@ export default function PlayerBoard({ player, isActive, highlightedSectors, targ
               </div>
 
               {/* Active slot */}
-              <div className={`w-16 h-20 rounded-lg border transition-colors overflow-hidden ${isTarget ? 'border-green-400' : highlighted ? 'border-yellow-400' : 'border-gray-600'}`}>
-                {stationedCard ? (
-                  <LevelCard
-                    card={stationedCard}
-                    mode="stationed"
-                    isHighlighted={highlighted}
-                  />
+              <div className={`w-16 h-20 rounded-lg border transition-colors overflow-hidden ${isTarget ? 'border-green-400' : highlighted ? 'border-yellow-400' : colony ? 'border-amber-700' : 'border-gray-600'}`}>
+                {colony ? (
+                  <div className="w-full h-full bg-amber-950/60 flex flex-col items-center justify-center gap-0.5">
+                    <span className="text-[9px] text-amber-400 font-semibold uppercase tracking-wide">Colony</span>
+                    <span className="text-sm font-bold text-amber-400">{colony.vp} 🚀</span>
+                  </div>
+                ) : stationedCard ? (
+                  <LevelCard card={stationedCard} mode="stationed" isHighlighted={highlighted} />
                 ) : (
                   <div className={`w-full h-full ${isTarget ? 'bg-green-900/40' : highlighted ? 'bg-yellow-900/40' : 'bg-gray-800'}`} />
                 )}

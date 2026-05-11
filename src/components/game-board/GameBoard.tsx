@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { GameState, DiceState } from '@/lib/types'
-import { SHIP_CARDS, SHIP_CARDS_BY_ID } from '@/lib/cards'
+import { SHIP_CARDS, SHIP_CARDS_BY_ID, COLONY_CARDS_BY_ID } from '@/lib/cards'
 import DiceArea from './board-features/DiceArea'
 import VictoryCards from './board-features/VictoryCards'
 import Shipyard from './board-features/Shipyard'
@@ -16,6 +16,7 @@ export default function GameBoard({ gameState: initialState }: Props) {
   const [gameState, setGameState] = useState(initialState)
   const [allocation, setAllocation] = useState<'split' | 'combine' | null>(null)
   const [selectedCardId, setSelectedCardId] = useState<string | null>(null)
+  const [selectedColonyId, setSelectedColonyId] = useState<string | null>(null)
 
   const selectedCard = selectedCardId ? SHIP_CARDS_BY_ID[selectedCardId] : null
   const targetSector = selectedCard?.sector ?? null
@@ -47,6 +48,47 @@ export default function GameBoard({ gameState: initialState }: Props) {
 
   function handleSelectCard(id: string) {
     setSelectedCardId(prev => prev === id ? null : id)
+    setSelectedColonyId(null)
+  }
+
+  function handleSelectColony(id: string) {
+    setSelectedColonyId(prev => prev === id ? null : id)
+    setSelectedCardId(null)
+  }
+
+  async function handleBuyColony(colonyId: string) {
+    const card = COLONY_CARDS_BY_ID[colonyId]
+    if (!card) return
+
+    const activePlayerId = gameState.turnOrder[gameState.activePlayerIndex]
+    const player = gameState.players[activePlayerId]
+    if (!player || player.money < card.cost) return
+
+    const existing = player.sectors[card.sector]
+    const updatedSector = {
+      stationCard: existing?.stationCard ?? '',
+      deployedCards: existing?.stationCard
+        ? [existing.stationCard, ...(existing.deployedCards ?? [])]
+        : (existing?.deployedCards ?? []),
+      colonyCard: card.id,
+      chargeTokens: existing?.chargeTokens ?? 0,
+    }
+
+    const next: GameState = {
+      ...gameState,
+      players: {
+        ...gameState.players,
+        [activePlayerId]: {
+          ...player,
+          money: player.money - card.cost,
+          vp: player.vp + card.vp,
+          sectors: { ...player.sectors, [card.sector]: updatedSector },
+        },
+      },
+    }
+
+    setSelectedColonyId(null)
+    await persist(next)
   }
 
   async function handleBuyCard(cardId: string) {
@@ -58,6 +100,7 @@ export default function GameBoard({ gameState: initialState }: Props) {
     if (!player || player.money < card.cost) return
 
     const sector = player.sectors[card.sector]
+    if (sector?.colonyCard) return
     const updatedSector = {
       stationCard: card.id,
       deployedCards: sector?.stationCard
@@ -104,7 +147,12 @@ export default function GameBoard({ gameState: initialState }: Props) {
 
         {/* Top section: victory cards + shipyard */}
         <div className="flex flex-col gap-2">
-          <VictoryCards gameState={gameState} />
+          <VictoryCards
+            gameState={gameState}
+            selectedColonyId={selectedColonyId}
+            onSelectColony={handleSelectColony}
+            onBuyColony={handleBuyColony}
+          />
           <Shipyard
             gameState={gameState}
             selectedCardId={selectedCardId}
