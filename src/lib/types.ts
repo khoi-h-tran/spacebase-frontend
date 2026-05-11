@@ -15,9 +15,9 @@ export interface DiceState {
 }
 
 export interface Shipyard {
-  level1: string[]
-  level2: string[]
-  level3: string[]
+  level1: (string | null)[]
+  level2: (string | null)[]
+  level3: (string | null)[]
   colony: string[]
 }
 

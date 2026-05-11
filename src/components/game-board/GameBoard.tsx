@@ -67,14 +67,13 @@ export default function GameBoard({ gameState: initialState }: Props) {
       chargeTokens: sector?.chargeTokens ?? 0,
     }
 
-    // Remove card from shipyard, draw replacement from deck
+    // Replace bought card in-place; draw from deck into the same slot
     const levelKey = `level${card.level}` as 'level1' | 'level2' | 'level3'
-    const currentShipyard = gameState.shipyard[levelKey].length > 0
+    const currentShipyard: (string | null)[] = gameState.shipyard[levelKey].length > 0
       ? gameState.shipyard[levelKey]
       : SHIP_CARDS.filter(c => c.level === card.level).slice(0, 6).map(c => c.id)
-    const shipyardRow = currentShipyard.filter(id => id !== cardId)
     const [drawn, ...remainingDeck] = gameState.decks[levelKey]
-    const newShipyardRow = drawn ? [...shipyardRow, drawn] : shipyardRow
+    const newShipyardRow = currentShipyard.map(id => id === cardId ? (drawn ?? null) : id)
 
     const next: GameState = {
       ...gameState,

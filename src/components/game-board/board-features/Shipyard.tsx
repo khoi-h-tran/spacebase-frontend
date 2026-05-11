@@ -30,7 +30,7 @@ export default function Shipyard({ gameState, selectedCardId, onSelectCard, onBu
       {LEVEL_LABELS.map(({ level, key }) => {
         const ids = gameState.shipyard[key]
         const cards = ids.length > 0
-          ? ids.map(id => SHIP_CARDS_BY_ID[id]).filter(Boolean)
+          ? ids.map(id => (id ? SHIP_CARDS_BY_ID[id] : undefined))
           : SHIP_CARDS.filter(c => c.level === level).slice(0, 6)
 
         const remaining = gameState.decks[key].length
