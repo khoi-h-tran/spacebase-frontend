@@ -20,9 +20,9 @@ export default function PlayerBoard({ player, isActive }: Props) {
           />
           <span className="font-semibold text-sm text-white">{player.name}</span>
         </div>
-        <span className="text-xs text-gray-400">🪙 {player.money}</span>
-        <span className="text-xs text-gray-400">💎 {player.income}</span>
-        <span className="text-xs text-gray-400">🚀 {player.vp}</span>
+        <span className="text-xs text-gray-400 pl-4">🪙 {player.money}</span>
+        <span className="text-xs text-gray-400 pl-4">💎 {player.income}</span>
+        <span className="text-xs text-gray-400 pl-4">🚀 {player.vp}</span>
       </div>
 
       {/* Sector slots */}
