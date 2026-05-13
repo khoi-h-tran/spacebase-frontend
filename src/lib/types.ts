@@ -117,7 +117,8 @@ export interface Ship {
   station: Effect[]
   deployed: Effect[]
   both: Effect[]
-  chargeAbility?: ChargeAbility
+  stationCharge?: ChargeAbility
+  deployedCharge?: ChargeAbility
 }
 
 export interface Colony {
