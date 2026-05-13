@@ -15,16 +15,20 @@ export const COLONY_CARDS: Colony[] = [
   { id: 'colony-12', sector: 12, cost: 42, vp: 14 },
 ]
 
-export const STARTER_CARDS: Ship[] = Array.from({ length: 12 }, (_, i) => ({
-  id: `starter-${i + 1}`,
-  name: `Starter ${i + 1}`,
-  sector: i + 1,
-  level: 1 as const,
-  cost: 0,
-  station:  { key: 'money' as const, amount: 1 },
-  deployed: { key: 'money' as const, amount: 1 },
-  both: null,
-}))
+export const STARTER_CARDS: Ship[] = [
+  { id: 'starter-1',  name: 'Starter 1',  sector: 1,  level: 1, cost: 0, station: { key: 'money',  amount: 1 }, deployed: { key: 'money', amount: 1 }, both: null },
+  { id: 'starter-2',  name: 'Starter 2',  sector: 2,  level: 1, cost: 0, station: { key: 'money',  amount: 1 }, deployed: { key: 'money', amount: 1 }, both: null },
+  { id: 'starter-3',  name: 'Starter 3',  sector: 3,  level: 1, cost: 0, station: { key: 'money',  amount: 1 }, deployed: { key: 'money', amount: 1 }, both: null },
+  { id: 'starter-4',  name: 'Starter 4',  sector: 4,  level: 1, cost: 0, station: { key: 'money',  amount: 1 }, deployed: { key: 'money', amount: 1 }, both: null },
+  { id: 'starter-5',  name: 'Starter 5',  sector: 5,  level: 1, cost: 0, station: { key: 'money',  amount: 1 }, deployed: { key: 'money', amount: 1 }, both: null },
+  { id: 'starter-6',  name: 'Starter 6',  sector: 6,  level: 1, cost: 0, station: { key: 'money',  amount: 1 }, deployed: { key: 'money', amount: 1 }, both: null },
+  { id: 'starter-7',  name: 'Starter 7',  sector: 7,  level: 1, cost: 0, station: { key: 'money',  amount: 3 }, deployed: { key: 'money', amount: 2 }, both: null },
+  { id: 'starter-8',  name: 'Starter 8',  sector: 8,  level: 1, cost: 0, station: { key: 'money',  amount: 3 }, deployed: { key: 'money', amount: 2 }, both: null },
+  { id: 'starter-9',  name: 'Starter 9',  sector: 9,  level: 1, cost: 0, station: { key: 'income', amount: 1 }, deployed: { key: 'money', amount: 3 }, both: null },
+  { id: 'starter-10', name: 'Starter 10', sector: 10, level: 1, cost: 0, station: { key: 'income', amount: 1 }, deployed: { key: 'money', amount: 3 }, both: null },
+  { id: 'starter-11', name: 'Starter 11', sector: 11, level: 1, cost: 0, station: { key: 'income', amount: 1 }, deployed: { key: 'money', amount: 4 }, both: null },
+  { id: 'starter-12', name: 'Starter 12', sector: 12, level: 1, cost: 0, station: { key: 'income', amount: 1 }, deployed: { key: 'money', amount: 5 }, both: null },
+]
 
 // NOTE: costs and rewards are placeholders — correct against the physical cards
 export const SHIP_CARDS: Ship[] = [
