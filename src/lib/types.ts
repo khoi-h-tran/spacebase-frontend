@@ -64,11 +64,48 @@ export interface RosterPlayer {
   color: string
 }
 
-export type RewardType = 'money' | 'income' | 'vp'
+export type MechanicKey =
+  | 'money'
+  | 'income'
+  | 'vp'
+  | 'charge'
+  | 'chain_right'
+  | 'chain_left'
+  | 'shift_die'
+  | 'set_die'
+  | 'buy_card'
+  | 'claim_cards'
+  | 'swap_sectors'
+  | 'exchange_card'
+  | 'double'
+  | 'place_charge'
+  | 'you_win'
 
-export interface Reward {
-  type: RewardType
-  amount: number
+export type Effect =
+  | { key: 'money';     amount: number }
+  | { key: 'income';    amount: number }
+  | { key: 'vp';        amount: number }
+  | { key: 'charge';    amount: number }
+  | { key: 'shift_die'; amount: number }
+  | { key: 'chain_right' }
+  | { key: 'chain_left' }
+  | { key: 'set_die' }
+  | { key: 'buy_card' }
+  | { key: 'swap_sectors' }
+  | { key: 'exchange_card' }
+  | { key: 'double' }
+  | { key: 'place_charge' }
+  | { key: 'you_win' }
+  | { key: 'claim_cards'; claims: { level: 1 | 2 | 3; count: number }[] }
+
+export type ChargeSlot =
+  | { required: 'always' }
+  | { required: 'min_players'; count: 2 | 3 | 4 }
+
+export interface ChargeAbility {
+  slots: ChargeSlot[]
+  linked: boolean
+  effect: Effect
 }
 
 export interface Ship {
@@ -77,8 +114,10 @@ export interface Ship {
   sector: number
   level: 1 | 2 | 3
   cost: number
-  station: Reward
-  deployed: Reward
+  station: Effect | null
+  deployed: Effect | null
+  both: Effect | null
+  chargeAbility?: ChargeAbility
 }
 
 export interface Colony {

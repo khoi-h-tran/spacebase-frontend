@@ -1,4 +1,4 @@
-import type { Ship, Reward } from '@/lib/types'
+import type { Ship, Effect } from '@/lib/types'
 
 interface Props {
   card: Ship
@@ -16,10 +16,14 @@ const LEVEL_STYLES = {
   3: { border: 'border-gray-600', label: 'text-purple-400' },
 }
 
-function rewardLabel(r: Reward) {
-  if (r.type === 'money')  return `+${r.amount} 🪙`
-  if (r.type === 'income') return `+${r.amount} 🌍`
-  if (r.type === 'vp')     return `+${r.amount} 🚀`
+function effectLabel(e: Effect | null) {
+  if (!e) return null
+  if (e.key === 'money')  return `+${e.amount} 🪙`
+  if (e.key === 'income') return `+${e.amount} 🌍`
+  if (e.key === 'vp')     return `+${e.amount} 🚀`
+  if (e.key === 'chain_right') return '→'
+  if (e.key === 'chain_left')  return '←'
+  return e.key
 }
 
 export default function LevelCard({ card, mode, isHighlighted, isSelected, isAffordable, onSelect, onBuy }: Props) {
@@ -52,7 +56,7 @@ export default function LevelCard({ card, mode, isHighlighted, isSelected, isAff
       {/* Station reward (blue) */}
       {(mode === 'market' || mode === 'stationed') && (
         <div className="flex-1 flex items-center justify-center bg-blue-950/60 px-1.5 py-1.5 text-xs text-blue-300 font-semibold">
-          {rewardLabel(card.station)}
+          {effectLabel(card.station)}
         </div>
       )}
 
@@ -62,7 +66,7 @@ export default function LevelCard({ card, mode, isHighlighted, isSelected, isAff
       {/* Deployed reward (red) + buy button */}
       {(mode === 'market' || mode === 'stationed' || mode === 'deployed') && (
         <div className={`flex items-center bg-red-950/60 px-1.5 py-1.5 ${isSelected && onBuy ? 'justify-between' : 'justify-center'}`}>
-          <span className="text-xs text-red-300 font-semibold">{rewardLabel(card.deployed)}</span>
+          <span className="text-xs text-red-300 font-semibold">{effectLabel(card.deployed)}</span>
           {isSelected && onBuy && (
             <button
               onClick={e => { e.stopPropagation(); onBuy() }}
