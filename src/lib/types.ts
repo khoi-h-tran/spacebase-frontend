@@ -114,9 +114,9 @@ export interface Ship {
   sector: number
   level: 1 | 2 | 3
   cost: number
-  station: Effect | null
-  deployed: Effect | null
-  both: Effect | null
+  station: Effect[]
+  deployed: Effect[]
+  both: Effect[]
   chargeAbility?: ChargeAbility
 }
 
