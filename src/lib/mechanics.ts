@@ -16,4 +16,5 @@ export const MECHANICS: Record<MechanicKey, { label: string; description: string
   double:        { label: '2×',           description: 'Double all rewards this activation'                   },
   place_charge:  { label: 'Place Charge', description: 'Place a charge token on any sector'                  },
   you_win:       { label: 'You Win',      description: 'Instant victory when charge requirement is met'       },
+  reroll_die:    { label: 'Reroll',       description: 'Reroll one or both dice'                                },
 }

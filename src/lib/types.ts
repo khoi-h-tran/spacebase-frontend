@@ -80,6 +80,7 @@ export type MechanicKey =
   | 'double'
   | 'place_charge'
   | 'you_win'
+  | 'reroll_die'
 
 export type Effect =
   | { key: 'money';     amount: number }
@@ -96,16 +97,18 @@ export type Effect =
   | { key: 'double' }
   | { key: 'place_charge' }
   | { key: 'you_win' }
+  | { key: 'reroll_die' }
   | { key: 'claim_cards'; claims: { level: 1 | 2 | 3; count: number }[] }
 
 export type ChargeSlot =
   | { required: 'always' }
   | { required: 'min_players'; count: 2 | 3 | 4 }
+  | { required: 'max_players'; count: 2 | 3 }
 
 export interface ChargeAbility {
   slots: ChargeSlot[]
   linked: boolean
-  effect: Effect
+  effects: Effect[]
 }
 
 export interface Ship {
