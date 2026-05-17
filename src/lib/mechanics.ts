@@ -17,4 +17,6 @@ export const MECHANICS: Record<MechanicKey, { label: string; description: string
   place_charge:  { label: 'Place Charge', description: 'Place a charge token on any sector'                  },
   you_win:       { label: 'You Win',      description: 'Instant victory when charge requirement is met'       },
   reroll_die:    { label: 'Reroll',       description: 'Reroll one or both dice'                                },
+  attack_vp:     { label: 'Attack VP',   description: 'All opponents lose N victory points'                     },
+  move_charge:   { label: 'Move Charge', description: 'Move one of your existing charge tokens to another open charge slot' },
 }

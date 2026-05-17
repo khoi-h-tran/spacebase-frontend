@@ -81,6 +81,8 @@ export type MechanicKey =
   | 'place_charge'
   | 'you_win'
   | 'reroll_die'
+  | 'attack_vp'
+  | 'move_charge'
 
 export type Effect =
   | { key: 'money';     amount: number }
@@ -88,14 +90,16 @@ export type Effect =
   | { key: 'vp';        amount: number }
   | { key: 'charge';    amount: number }
   | { key: 'shift_die'; amount: number }
+  | { key: 'attack_vp'; amount: number }
   | { key: 'chain_right' }
   | { key: 'chain_left' }
   | { key: 'set_die' }
-  | { key: 'buy_card' }
+  | { key: 'buy_card';  amount?: number }
   | { key: 'swap_sectors' }
   | { key: 'exchange_card' }
   | { key: 'double' }
   | { key: 'place_charge' }
+  | { key: 'move_charge' }
   | { key: 'you_win' }
   | { key: 'reroll_die' }
   | { key: 'claim_cards'; claims: { level: 1 | 2 | 3; count: number }[] }
@@ -108,7 +112,8 @@ export type ChargeSlot =
 export interface ChargeAbility {
   slots: ChargeSlot[]
   linked: boolean
-  effects: Effect[]
+  effects: Effect[]           // fires when charges are spent (unlinked: per charge; linked: when all filled)
+  onPlaceEffects?: Effect[]   // fires each time a charge token is placed on this card
 }
 
 export interface Ship {

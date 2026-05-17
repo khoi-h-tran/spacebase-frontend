@@ -95,7 +95,7 @@ export const SHIP_CARDS: Ship[] = [
   // Level 2 — sector 1
   { id: 'l2-1',  name: 'L2 S1',  sector: 1,  level: 2, cost: 7, station: [{ key: 'money', amount: 3 }], deployed: [{ key: 'money', amount: 2 }], both: [] },
   { id: 'l2-2',  name: 'L2 S1',  sector: 1,  level: 2, cost: 8, station: [{ key: 'vp', amount: 2 }], deployed: [{ key: 'vp', amount: 1 }], both: [] },
-  { id: 'l2-3',  name: 'L2 S1',  sector: 1,  level: 2, cost: 9, station: [], deployed: [{ key: 'income', amount: 1 }], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }] } },
+  { id: 'l2-3',  name: 'L2 S1',  sector: 1,  level: 2, cost: 9, station: [], deployed: [{ key: 'income', amount: 1 }], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }], onPlaceEffects: [{ key: 'money', amount: 1 }] } },
   { id: 'l2-4',  name: 'L2 S1',  sector: 1,  level: 2, cost: 9, station: [], deployed: [], both: [], stationCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'shift_die', amount: 2 }] }, deployedCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'shift_die', amount: 1 }] } },
   // Level 2 — sector 2
   { id: 'l2-5',  name: 'L2 S2',  sector: 2,  level: 2, cost: 7, station: [{ key: 'money', amount: 3 }], deployed: [{ key: 'money', amount: 2 }], both: [] },
@@ -121,11 +121,11 @@ export const SHIP_CARDS: Ship[] = [
   { id: 'l2-21', name: 'U.E.S. Schmitt 9828-E',   sector: 6, level: 2, cost: 8, station: [{ key: 'money', amount: 3 }], deployed: [{ key: 'money', amount: 2 }], both: [] },
   { id: 'l2-22', name: 'U.E.S. Slayton 5363-B',   sector: 6, level: 2, cost: 8, station: [{ key: 'money', amount: 3 }], deployed: [{ key: 'vp',    amount: 1 }], both: [] },
   { id: 'l2-23', name: 'U.E.S. Patsayev 6859-H',  sector: 6, level: 2, cost: 8, station: [{ key: 'vp',    amount: 2 }], deployed: [{ key: 'vp',    amount: 1 }], both: [] },
-  { id: 'l2-24', name: 'U.E.S. Kubasov 3192-G',   sector: 6, level: 2, cost: 9, station: [], deployed: [{ key: 'income', amount: 1 }], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 2 }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }] } },
+  { id: 'l2-24', name: 'U.E.S. Kubasov 3192-G',   sector: 6, level: 2, cost: 9, station: [], deployed: [{ key: 'income', amount: 1 }], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 2 }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }], onPlaceEffects: [{ key: 'money', amount: 1 }] } },
   // Level 2 — sector 7
   { id: 'l2-25', name: 'U.E.S. Makarov 6674-G',   sector: 7, level: 2, cost: 7, station: [{ key: 'money', amount: 6 }], deployed: [{ key: 'money', amount: 5 }], both: [] },
   { id: 'l2-26', name: 'U.E.S. Haise 3712-D',     sector: 7, level: 2, cost: 7, station: [{ key: 'money', amount: 4 }, { key: 'income', amount: 1 }], deployed: [{ key: 'income', amount: 1 }, { key: 'money', amount: 1 }], both: [] },
-  { id: 'l2-27', name: 'P.S.S. Zholodov 1830-F',  sector: 7, level: 2, cost: 7, station: [], deployed: [], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }] }, deployedCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'buy_card' }, { key: 'vp', amount: 2 }] } },
+  { id: 'l2-27', name: 'P.S.S. Zholodov 1830-F',  sector: 7, level: 2, cost: 7, station: [], deployed: [], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }], onPlaceEffects: [{ key: 'money', amount: 2 }] }, deployedCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'buy_card' }, { key: 'vp', amount: 2 }] } },
   { id: 'l2-28', name: 'U.E.S. Carr 7510-H',      sector: 7, level: 2, cost: 9, station: [{ key: 'vp', amount: 4 }], deployed: [{ key: 'vp', amount: 2 }], both: [] },
   // Level 2 — sector 8
   { id: 'l2-29', name: 'U.E.S. Lazarev 4784-B',   sector: 8, level: 2, cost: 7, station: [{ key: 'money', amount: 7 }], deployed: [{ key: 'money', amount: 5 }], both: [] },
@@ -140,7 +140,7 @@ export const SHIP_CARDS: Ship[] = [
   // Level 2 — sector 10
   { id: 'l2-37', name: 'U.E.S. Lousma 6040-C',           sector: 10, level: 2, cost: 7, station: [{ key: 'money', amount: 9 }], deployed: [{ key: 'money', amount: 6 }], both: [] },
   { id: 'l2-38', name: 'U.E.S. Gorbatko 2007-F',         sector: 10, level: 2, cost: 7, station: [{ key: 'income', amount: 3 }], deployed: [{ key: 'income', amount: 2 }], both: [] },
-  { id: 'l2-39', name: 'U.E.S. Rozhdestvensky 6723-C',   sector: 10, level: 2, cost: 7, station: [], deployed: [{ key: 'money', amount: 4 }, { key: 'set_die' }], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }] } },
+  { id: 'l2-39', name: 'U.E.S. Rozhdestvensky 6723-C',   sector: 10, level: 2, cost: 7, station: [], deployed: [{ key: 'money', amount: 4 }, { key: 'set_die' }], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }], onPlaceEffects: [{ key: 'money', amount: 4 }] } },
   { id: 'l2-40', name: 'U.E.S. Lebedev 5128-B',          sector: 10, level: 2, cost: 8, station: [{ key: 'vp', amount: 5 }], deployed: [{ key: 'vp', amount: 3 }], both: [] },
   // Level 2 — sector 11
   { id: 'l2-41', name: 'U.E.S. Kerwin 8426-A',   sector: 11, level: 2, cost: 7, station: [{ key: 'money', amount: 10 }], deployed: [{ key: 'money', amount: 7 }], both: [] },
@@ -154,41 +154,41 @@ export const SHIP_CARDS: Ship[] = [
   { id: 'l2-48', name: 'U.E.S. Artyukhin 7727-D',     sector: 12, level: 2, cost: 9, station: [{ key: 'vp', amount: 7 }], deployed: [{ key: 'vp', amount: 4 }], both: [] },
 
   // Level 3 — sector 1
-  { id: 'l3-1',  name: 'L3 S1',  sector: 1,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-2',  name: 'L3 S1',  sector: 1,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-3',  name: 'L3 S1',  sector: 1,  level: 3, cost: 0, station: [], deployed: [], both: [] },
+  { id: 'l3-1',  name: 'U.E.S. Young 6740-G',    sector: 1, level: 3, cost: 12, station: [{ key: 'money', amount: 4 }], deployed: [{ key: 'money', amount: 4 }], both: [] },
+  { id: 'l3-2',  name: 'U.E.S. Gagarin 4879-F',  sector: 1, level: 3, cost: 12, station: [], deployed: [], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }], linked: false, effects: [{ key: 'set_die' }, { key: 'money', amount: 1 }] }, deployedCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'set_die' }, { key: 'money', amount: 1 }] } },
+  { id: 'l3-3',  name: 'U.E.S. Walker 3930-D',   sector: 1, level: 3, cost: 14, station: [{ key: 'vp', amount: 3 }], deployed: [{ key: 'vp', amount: 2 }], both: [] },
   // Level 3 — sector 2
-  { id: 'l3-4',  name: 'L3 S2',  sector: 2,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-5',  name: 'L3 S2',  sector: 2,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-6',  name: 'L3 S2',  sector: 2,  level: 3, cost: 0, station: [], deployed: [], both: [] },
+  { id: 'l3-4',  name: 'U.E.S. McDivitt 2121-A',  sector: 2, level: 3, cost: 12, station: [{ key: 'money', amount: 4 }], deployed: [{ key: 'money', amount: 4 }], both: [] },
+  { id: 'l3-5',  name: 'U.E.S. Shepard 3592-G',   sector: 2, level: 3, cost: 13, station: [], deployed: [{ key: 'money', amount: 2 }, { key: 'vp', amount: 1 }], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 2 }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'money', amount: 20 }] } },
+  { id: 'l3-6',  name: 'U.E.S. Komarov 9308-G',   sector: 2, level: 3, cost: 14, station: [{ key: 'vp', amount: 3 }], deployed: [{ key: 'vp', amount: 2 }], both: [] },
   // Level 3 — sector 3
-  { id: 'l3-7',  name: 'L3 S3',  sector: 3,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-8',  name: 'L3 S3',  sector: 3,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-9',  name: 'L3 S3',  sector: 3,  level: 3, cost: 0, station: [], deployed: [], both: [] },
+  { id: 'l3-7',  name: 'U.E.S. White 4448-C',        sector: 3, level: 3, cost: 12, station: [{ key: 'money', amount: 4 }], deployed: [{ key: 'money', amount: 4 }], both: [] },
+  { id: 'l3-8',  name: 'U.E.S. Grissom 8139-H',      sector: 3, level: 3, cost: 13, station: [], deployed: [], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'always' }], linked: false, effects: [{ key: 'money', amount: 3 }] }, deployedCharge: { slots: [{ required: 'always' }, { required: 'always' }], linked: false, effects: [{ key: 'money', amount: 3 }] } },
+  { id: 'l3-9',  name: 'U.E.S. Feoktistov 1804-D',   sector: 3, level: 3, cost: 14, station: [{ key: 'vp', amount: 3 }], deployed: [{ key: 'vp', amount: 2 }], both: [] },
   // Level 3 — sector 4
-  { id: 'l3-10', name: 'L3 S4',  sector: 4,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-11', name: 'L3 S4',  sector: 4,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-12', name: 'L3 S4',  sector: 4,  level: 3, cost: 0, station: [], deployed: [], both: [] },
+  { id: 'l3-10', name: 'U.E.S. Conrad 5602-E',    sector: 4, level: 3, cost: 12, station: [{ key: 'money', amount: 4 }], deployed: [{ key: 'money', amount: 4 }], both: [] },
+  { id: 'l3-11', name: 'U.E.S. Titov 9072-F',     sector: 4, level: 3, cost: 12, station: [], deployed: [], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }], linked: false, effects: [{ key: 'set_die' }, { key: 'money', amount: 1 }] }, deployedCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'set_die' }, { key: 'money', amount: 1 }] } },
+  { id: 'l3-12', name: 'U.E.S. Yegorov 1205-H',   sector: 4, level: 3, cost: 14, station: [{ key: 'vp', amount: 3 }], deployed: [{ key: 'vp', amount: 2 }], both: [] },
   // Level 3 — sector 5
-  { id: 'l3-13', name: 'L3 S5',  sector: 5,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-14', name: 'L3 S5',  sector: 5,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-15', name: 'L3 S5',  sector: 5,  level: 3, cost: 0, station: [], deployed: [], both: [] },
+  { id: 'l3-13', name: 'U.E.S. Borman 3060-D',   sector: 5, level: 3, cost: 12, station: [{ key: 'money', amount: 4 }], deployed: [{ key: 'money', amount: 4 }], both: [] },
+  { id: 'l3-14', name: 'U.E.S. Schirra 9069-D',  sector: 5, level: 3, cost: 14, station: [], deployed: [{ key: 'money', amount: 2 }, { key: 'vp', amount: 1 }], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }], onPlaceEffects: [{ key: 'money', amount: 2 }] } },
+  { id: 'l3-15', name: 'U.E.S. Leonov 4621-E',   sector: 5, level: 3, cost: 14, station: [{ key: 'vp', amount: 3 }], deployed: [{ key: 'vp', amount: 2 }], both: [] },
   // Level 3 — sector 6
-  { id: 'l3-16', name: 'L3 S6',  sector: 6,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-17', name: 'L3 S6',  sector: 6,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-18', name: 'L3 S6',  sector: 6,  level: 3, cost: 0, station: [], deployed: [], both: [] },
+  { id: 'l3-16', name: 'U.E.S. Lovell 1948-A',    sector: 6, level: 3, cost: 12, station: [{ key: 'money', amount: 4 }], deployed: [{ key: 'money', amount: 4 }], both: [] },
+  { id: 'l3-17', name: 'U.E.S. Glenn 1817-C',     sector: 6, level: 3, cost: 13, station: [], deployed: [], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'place_charge' }] }, deployedCharge: { slots: [{ required: 'always' }, { required: 'always' }], linked: true, effects: [{ key: 'place_charge' }] } },
+  { id: 'l3-18', name: 'U.E.S. Belyayev 1657-D',  sector: 6, level: 3, cost: 14, station: [{ key: 'vp', amount: 3 }], deployed: [{ key: 'vp', amount: 2 }], both: [] },
   // Level 3 — sector 7
-  { id: 'l3-19', name: 'L3 S7',  sector: 7,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-20', name: 'L3 S7',  sector: 7,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-21', name: 'L3 S7',  sector: 7,  level: 3, cost: 0, station: [], deployed: [], both: [] },
+  { id: 'l3-19', name: 'U.E.S. Cooper 6412-D',  sector: 7, level: 3, cost: 13, station: [{ key: 'money', amount: 3 }, { key: 'income', amount: 3 }], deployed: [{ key: 'money', amount: 3 }, { key: 'income', amount: 2 }], both: [] },
+  { id: 'l3-20', name: 'U.E.S. Gordon 7981-G',  sector: 7, level: 3, cost: 13, station: [], deployed: [], both: [], stationCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'attack_vp', amount: 4 }, { key: 'buy_card', amount: 2 }] }, deployedCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'attack_vp', amount: 3 }, { key: 'buy_card' }] } },
+  { id: 'l3-21', name: 'U.E.S. Aldrin 4775-F',  sector: 7, level: 3, cost: 14, station: [{ key: 'vp', amount: 6 }], deployed: [{ key: 'vp', amount: 3 }], both: [] },
   // Level 3 — sector 8
-  { id: 'l3-22', name: 'L3 S8',  sector: 8,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-23', name: 'L3 S8',  sector: 8,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-24', name: 'L3 S8',  sector: 8,  level: 3, cost: 0, station: [], deployed: [], both: [] },
+  { id: 'l3-22', name: 'P.S.S. Tereshkova 5875-A', sector: 8, level: 3, cost: 13, station: [{ key: 'claim_cards', claims: [{ level: 1, count: 2 }] }], deployed: [], both: [], deployedCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'claim_cards', claims: [{ level: 2, count: 1 }] }] } },
+  { id: 'l3-23', name: 'U.E.S. Collins 2064-F',    sector: 8, level: 3, cost: 14, station: [], deployed: [], both: [], stationCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'place_charge' }, { key: 'move_charge' }] }, deployedCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'place_charge' }] } },
+  { id: 'l3-24', name: 'U.E.S. Eisele 7639-F',     sector: 8, level: 3, cost: 14, station: [{ key: 'vp', amount: 6 }], deployed: [{ key: 'vp', amount: 3 }], both: [] },
   // Level 3 — sector 9
-  { id: 'l3-25', name: 'L3 S9',  sector: 9,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-26', name: 'L3 S9',  sector: 9,  level: 3, cost: 0, station: [], deployed: [], both: [] },
-  { id: 'l3-27', name: 'L3 S9',  sector: 9,  level: 3, cost: 0, station: [], deployed: [], both: [] },
+  { id: 'l3-25', name: 'P.S.S. Bykovsky 4498-A',    sector: 9, level: 3, cost: 13, station: [{ key: 'claim_cards', claims: [{ level: 2, count: 1 }, { level: 1, count: 1 }] }], deployed: [], both: [], deployedCharge: { slots: [{ required: 'always' }], linked: false, effects: [{ key: 'claim_cards', claims: [{ level: 2, count: 1 }] }] } },
+  { id: 'l3-26', name: 'U.E.S. Cernan 9131-H',      sector: 9, level: 3, cost: 13, station: [], deployed: [{ key: 'vp', amount: 3 }], both: [], stationCharge: { slots: [{ required: 'always' }, { required: 'always' }, { required: 'max_players', count: 3 }], linked: true, effects: [{ key: 'swap_sectors' }], onPlaceEffects: [{ key: 'money', amount: 6 }] } },
+  { id: 'l3-27', name: 'U.E.S. Cunningham 9172-H',  sector: 9, level: 3, cost: 14, station: [{ key: 'vp', amount: 7 }], deployed: [{ key: 'vp', amount: 4 }], both: [] },
   // Level 3 — sector 10
   { id: 'l3-28', name: 'L3 S10', sector: 10, level: 3, cost: 0, station: [], deployed: [], both: [] },
   { id: 'l3-29', name: 'L3 S10', sector: 10, level: 3, cost: 0, station: [], deployed: [], both: [] },
